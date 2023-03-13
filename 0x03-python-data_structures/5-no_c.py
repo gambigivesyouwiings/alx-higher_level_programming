@@ -6,4 +6,4 @@ def no_c(my_string):
             list.remove(char)
 
         new = "".join(list)
-        return (new)
+        return new
