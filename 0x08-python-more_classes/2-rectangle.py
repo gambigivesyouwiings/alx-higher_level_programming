@@ -50,4 +50,4 @@ class Rectangle:
         if self.__height == 0 or self.__width == 0:
             return 0
         else:
-            return (2 * (height + width))
+            return (2 * (self.__height + self.__width))
