@@ -55,19 +55,20 @@ class Rectangle:
         else:
             return (2 * (self.__height + self.__width))
 
-    def __str__(self):
-        """Return the printable representation of the Rectangle.
-        Represents the rectangle with the # character.
-        """
+    def __str__(self) -> str:
+        """presents a diagram of the rectangle defined for an object"""
         if self.__width == 0 or self.__height == 0:
             return ("")
-
-        rect = []
-        for i in range(self.__height):
-            [rect.append(print_symbol) for j in range(self.__width)]
-            if i != self.__height - 1:
-                rect.append("\n")
-        return ("".join(rect))
+        rectangle = ""
+        for column in range(self.__height):
+            for row in range(self.__width):
+                try:
+                    rectangle += str(self.print_symbol)
+                except Exception:
+                    rectangle += type(self).print_symbol
+            if column < self.__height - 1:
+                rectangle += "\n"
+        return (rectangle)
 
     def __repr__(self):
         """Return the string representation of the Rectangle."""
@@ -79,3 +80,27 @@ class Rectangle:
         """Print a message for every deletion of a Rectangle."""
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
+
+my_rectangle_1 = Rectangle(8, 4)
+print(my_rectangle_1)
+print("--")
+my_rectangle_1.print_symbol = "&"
+print(my_rectangle_1)
+print("--")
+
+my_rectangle_2 = Rectangle(2, 1)
+print(my_rectangle_2)
+print("--")
+Rectangle.print_symbol = "C"
+print(my_rectangle_2)
+print("--")
+
+my_rectangle_3 = Rectangle(7, 3)
+print(my_rectangle_3)
+
+print("--")
+
+Rectangle.print_symbol = ["C", "is", "fun!"]
+print(my_rectangle_3)
+
+print("--")
