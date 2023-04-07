@@ -16,15 +16,8 @@ class Rectangle:
         """
         self.width = width
         self.height = height
-        self.incr()
-    
-    @staticmethod
-    def incr():
         Rectangle.number_of_instances += 1
 
-    @staticmethod
-    def decr():
-        Rectangle.number_of_instances -= 1
 
     @property
     def width(self):
@@ -86,13 +79,4 @@ class Rectangle:
     def __del__(self):
         """Print a message for every deletion of a Rectangle."""
         print("Bye rectangle...")
-        self.decr()
-
-my_rectangle_1 = Rectangle(2, 4)
-my_rectangle_2 = Rectangle(2, 4)
-print("{:d} instances of Rectangle".format(Rectangle.number_of_instances))
-del my_rectangle_1
-print("{:d} instances of Rectangle".format(Rectangle.number_of_instances))
-del my_rectangle_2
-print("{:d} instances of Rectangle".format(Rectangle.number_of_instances))
-        
+        Rectangle.number_of_instances -= 1
