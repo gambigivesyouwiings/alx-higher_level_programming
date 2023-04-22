@@ -1,24 +1,19 @@
 #!/usr/bin/python3
-
-#from model.base import Base
-
-class Base:
-    __nb_objects = 0
-
-    def __init__(self, id=None):
-        if id != None:
-            self.id = id
-        else:
-            Base.__nb_objects += 1
-            self.id = Base. __nb_objects
+"""
+    contains class Rectangle which implements Base.
+"""
+from models.base import Base
 
 
 class Rectangle(Base):
-    """ This is the rect class 
-    Methods: __init__, check_type, area
+    """ This is the rect class
+        methods: __init__, check_type, area
     """
     @staticmethod
     def check_type(attribute, input):
+        """ Checks if inputs to an attribute meets requirements
+            returns: True if exception """
+
         if type(input) != int:
             raise TypeError(f"{attribute} must be an integer")
             return True
@@ -30,6 +25,8 @@ class Rectangle(Base):
             return True
 
     def __init__(self, width, height, x=0, y=0, id=None):
+        """ Initializes instance """
+
         super().__init__(id)
         if not Rectangle.check_type("width", input=width):
             self.__width = width
@@ -42,31 +39,37 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """I'm the 'width' property."""
+        """I'm the 'width' property.
+            Returns: width"""
         return self.__width
 
     @width.setter
     def width(self, value):
+        """ I am the setter """
         if not Rectangle.check_type("width", input=value):
             self.__width = value
 
     @property
     def height(self):
-        """I'm the 'height' property."""
+        """I'm the 'height' property.
+            returns setter """
         return self.__height
 
     @height.setter
     def height(self, value):
+        """ Height setter """
         if not Rectangle.check_type("height", input=value):
             self.__height = value
 
     @property
     def x(self):
-        """I'm the 'x' property."""
+        """I'm the 'x' property.
+        returns: x"""
         return self.__x
 
     @x.setter
     def x(self, value):
+        """ x.setter method """
         if not Rectangle.check_type("x", input=value):
             self.__x = value
 
@@ -77,14 +80,21 @@ class Rectangle(Base):
 
     @y.setter
     def y(self, value):
+        """ I'm the  setter """
         if not Rectangle.check_type("y", input=value):
             self.__y = value
 
     def area(self):
+        """
+            contains class Rectangle which implements Base.
+        """
         ans = self.__width * self.__height
         return ans
 
     def display(self):
+        """
+            prints to stdout the Rectangle instance with '#'
+        """
         for item in range(0, self.__height):
             for num in range(0, self.__width):
                 print("#", end="")
@@ -94,14 +104,15 @@ class Rectangle(Base):
         """
             returns a string formart of the rectangle
         """
-        return(f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - {self.__width}/{self.__height}")
+        return (f"[Rectangle] {self.id}) {self.__x}/" +
+                f"{self.__y} - {self.__width}/{self.__height}")
 
     def update(self, *args, **kwargs):
         """ sets instance attributes to new values """
 
         if len(args) == 0:
-            for key,value in kwargs.items:
-                self.__setatr__(key, value)
+            for key, value in kwargs.items():
+                self.__setattr__(key, value)
         else:
             try:
                 self.id = args[0]
@@ -112,37 +123,11 @@ class Rectangle(Base):
             except IndexError:
                 pass
 
+    def to_dictionary(self):
+        """ returns: A dictionary representation of the instance """
 
-if __name__ == "__main__":
-
-    r1 = Rectangle(4, 6)
-    r1.display()
-
-    print("---")
-
-    r1 = Rectangle(2, 2)
-    r1.display()
-
-    r1 = Rectangle(4, 6, 2, 1, 12)
-    print(r1)
-
-    r2 = Rectangle(5, 5, 1)
-    print(r2)
-
-    r1 = Rectangle(10, 10, 10, 10)
-    print(r1)
-
-    r1.update(89)
-    print(r1)
-
-    r1.update(89, 2)
-    print(r1)
-
-    r1.update(89, 2, 3)
-    print(r1)
-
-    r1.update(89, 2, 3, 4)
-    print(r1)
-
-    r1.update(89, 2, 3, 4, 5)
-    print(r1)
+        return {"id": self.id,
+                "width": self.width,
+                "height": self.height,
+                "x": self.x,
+                "y": self.y}
