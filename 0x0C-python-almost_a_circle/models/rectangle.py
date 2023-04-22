@@ -95,8 +95,8 @@ class Rectangle(Base):
         """
             prints to stdout the Rectangle instance with '#'
         """
-        for item in range(0, self.__height):
-            for num in range(0, self.__width):
+        for item in range(self.__height):
+            for num in range(self.__width):
                 print("#", end="")
             print("")
 
@@ -104,8 +104,9 @@ class Rectangle(Base):
         """
             returns a string formart of the rectangle
         """
-        return (f"[Rectangle] {self.id}) {self.__x}/" +
-                f"{self.__y} - {self.__width}/{self.__height}")
+        return "[{}] ({}) {}/{} - {}/{}".format(type(self).__name__, self.id,
+                                                self.__x, self.__y,
+                                                self.__width, self.__height)
 
     def update(self, *args, **kwargs):
         """ sets instance attributes to new values """
